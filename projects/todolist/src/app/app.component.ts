@@ -12,9 +12,11 @@ import {Todo} from "./todo";
     <div class="container">
       <h1>Liste de chose à faire</h1>
       <ul>
-        <li *ngFor="let todo of IncomleteTodos">
+        <ng-container *ngFor="let todo of todoList">
+          <li *ngIf="!todo.isCompleted">
             {{todo.title}}
-        </li>
+          </li>
+        </ng-container>
       </ul>
     </div>
   `,
@@ -27,8 +29,5 @@ export class AppComponent {
   }
   selectTodo(id: number):Todo {
     return this.todoList[id]
-  }
-  get IncomleteTodos() {
-    return this.todoList.filter(todo => !todo.isCompleted);
   }
 }
