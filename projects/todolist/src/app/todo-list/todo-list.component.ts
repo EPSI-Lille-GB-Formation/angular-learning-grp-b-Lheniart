@@ -13,10 +13,11 @@ import {TodoComponent} from "../todo/todo.component";
   template: `
       <h1>Liste de chose à faire</h1>
 
-      <a href="#" role="button">A faire</a>
-      <a href="#" role="button">Terminée</a>
+      <a href="#" role="button" (click)="onClickTodo()">A faire</a>
+      <a href="#" role="button" (click)="onClickTodoCompleted()">Terminée</a>
+      <a href="#" role="button" (click)="onClickTodoShowAll()">Affciher tout</a>
       <ng-container *ngFor="let todo of todoList">
-          <app-todo [value]="todo"></app-todo>
+          <app-todo [value]="todo" *ngIf="(todo.isCompleted == completedFiler) || (showAll)"></app-todo>
       </ng-container>
   `,
   styles: [
@@ -25,10 +26,18 @@ import {TodoComponent} from "../todo/todo.component";
 })
 export class TodoListComponent {
   todoList  = TODOS
+  completedFiler = false;
+  showAll = false
   constructor(){
     console.table(this.todoList);
   }
-  selectTodo(id: number):Todo {
-    return this.todoList[id]
+  onClickTodo(){
+    this.completedFiler = false;
+  }
+  onClickTodoCompleted(){
+    this.completedFiler = true;
+  }
+  onClickTodoShowAll(){
+    this.showAll = !this.showAll
   }
 }
