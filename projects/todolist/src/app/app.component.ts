@@ -1,13 +1,13 @@
 import {Component} from '@angular/core';
-import {TodoListComponent} from "./todo-list.component";
+import {TodoListComponent} from "./todo-list/todo-list.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [TodoListComponent],
+  imports: [TodoListComponent, TodoListComponent],
   template: `
     <div class="container">
-      <app-todo></app-todo>
+      <todo-list></todo-list>
     </div>
 
   `,
