@@ -17,7 +17,7 @@ import {TodoComponent} from "../todo/todo.component";
       <a href="#" role="button" (click)="onClickTodoCompleted()">Terminée</a>
       <a href="#" role="button" (click)="onClickTodoShowAll()">Affciher tout</a>
       <ng-container *ngFor="let todo of todoList">
-          <app-todo [value]="todo" *ngIf="(todo.isCompleted == completedFiler) || (showAll)"></app-todo>
+          <app-todo [value]="todo" [listTodo]="todoList" *ngIf="(todo.isCompleted == completedFiler) || (showAll)"></app-todo>
       </ng-container>
   `,
   styles: [

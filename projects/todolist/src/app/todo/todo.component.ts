@@ -44,6 +44,9 @@ export class TodoComponent {
   todo!: Todo
   checkboxValue!: boolean
 
+  @Input("listTodo")
+  todoList!: Todo[]
+
   ngAfterViewInit() {
     setTimeout(() => {
       this.checkboxValue = this.todo.isCompleted;
@@ -55,6 +58,6 @@ export class TodoComponent {
   }
 
   deleteTodo() {
-    console.log("supprime")
+    TODOS.splice(this.todoList.indexOf(this.todo),1)
   }
 }
