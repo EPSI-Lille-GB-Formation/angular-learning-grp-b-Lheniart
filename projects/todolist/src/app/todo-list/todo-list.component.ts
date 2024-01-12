@@ -4,6 +4,8 @@ import { RouterOutlet } from '@angular/router';
 import {BorderHighlightDirective} from "../border-highlight.directive";
 import {TODOS} from "../mock-todo";
 import {TodoComponent} from "../todo/todo.component";
+import {TodoService} from "../todo.service";
+import {Todo} from "../todo";
 
 @Component({
   selector: 'todo-list',
@@ -24,21 +26,23 @@ import {TodoComponent} from "../todo/todo.component";
   ],
 })
 export class TodoListComponent {
-  todoList  = TODOS
-  completedFiler = false;
-  showAll = false
-  constructor(){
-    console.table(this.todoList);
+  todoList: Todo[] = []
+  completedFiler: boolean = false;
+  showAll: boolean = false
+  constructor(private todoService: TodoService){}
+
+  ngOnInit(): void{
+    this.todoService.getTodoList().subscribe(todos => this.todoList = todos)
   }
-  onClickTodo(){
+  onClickTodo(): void{
     this.completedFiler = false;
     this.showAll = false;
   }
-  onClickTodoCompleted(){
+  onClickTodoCompleted(): void{
     this.completedFiler = true;
     this.showAll = false;
   }
-  onClickTodoShowAll(){
+  onClickTodoShowAll(): void{
     this.showAll = !this.showAll;
   }
 }
