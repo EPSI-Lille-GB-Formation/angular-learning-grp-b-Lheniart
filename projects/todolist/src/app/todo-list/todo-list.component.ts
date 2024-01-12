@@ -33,11 +33,13 @@ export class TodoListComponent {
   }
   onClickTodo(){
     this.completedFiler = false;
+    this.showAll = false;
   }
   onClickTodoCompleted(){
     this.completedFiler = true;
+    this.showAll = false;
   }
   onClickTodoShowAll(){
-    this.showAll = !this.showAll
+    this.showAll = !this.showAll;
   }
 }
