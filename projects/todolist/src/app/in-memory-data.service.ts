@@ -16,8 +16,4 @@ export class InMemoryDataService implements InMemoryDbService{
     return {todos}
   }
 
-  getById(id: number): Todo {
-    return TODOS.find(todo => todo.id === id)!
-  }
-
 }
