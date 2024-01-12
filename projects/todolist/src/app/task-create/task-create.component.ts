@@ -15,7 +15,7 @@ import {RetourDirective} from "../retour.directive";
   template: `
     <form (ngSubmit)="submitForm()">
 
-      <!-- Grid -->
+
 
 
         <!-- Markup example 1: input is inside label -->
