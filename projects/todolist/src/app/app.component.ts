@@ -1,13 +1,14 @@
 import {Component} from '@angular/core';
 import {TodoListComponent} from "./todo-list/todo-list.component";
+import {RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [TodoListComponent, TodoListComponent],
+  imports: [TodoListComponent, TodoListComponent, RouterOutlet],
   template: `
     <div class="container">
-      <todo-list></todo-list>
+      <router-outlet></router-outlet>
     </div>
 
   `,

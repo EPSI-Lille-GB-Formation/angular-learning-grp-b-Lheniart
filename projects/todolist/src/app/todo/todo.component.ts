@@ -4,12 +4,17 @@ import {CommonModule} from "@angular/common";
 import {Todo} from "../todo";
 import {FormsModule} from "@angular/forms";
 import {TODOS} from "../mock-todo";
+import {routes} from "../app.routes";
+import {Router} from "@angular/router";
+import {TodoService} from "../todo.service";
+import {RetourDirective} from "../retour.directive";
 
 @Component({
   selector: 'app-todo',
   standalone: true,
   imports: [
     BorderHighlightDirective,
+    RetourDirective,
     CommonModule,
     FormsModule
   ],
@@ -21,8 +26,8 @@ import {TODOS} from "../mock-todo";
           {{todo.title}}
         </label>
         <div class="action">
-          <a href="#">Edit</a>
-          <a href="#" (click)="deleteTodo()">Delete</a>
+          <a redirect redirect-url="task/{{todo.id}}">Edit</a>
+          <a (click)="deleteTodo($event)">Delete</a>
         </div>
       </div>
     </article>
@@ -40,14 +45,24 @@ import {TODOS} from "../mock-todo";
 })
 export class TodoComponent {
 
+  constructor(private router: Router, private todoService: TodoService) {
+  }
+
   @Input("value")
   todo!: Todo
+
   checkboxValue!: boolean
 
   @Input("listTodo")
   todoList!: Todo[]
 
-  deleteTodo() {
-    TODOS.splice(this.todoList.indexOf(this.todo),1)
+  editTodo(event: Event){
+    event.preventDefault();
+    this.router.navigateByUrl(`/task/${this.todo.id}`).then(r => console.log(r))
+  }
+
+  deleteTodo(event: Event) {
+    event.preventDefault()
+    this.todoService.deleteTodo(this.todo.id).subscribe(todo =>console.log(todo))
   }
 }
