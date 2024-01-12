@@ -17,11 +17,11 @@ import {TODOS} from "../mock-todo";
     <article border-highlight>
       <div class="grid">
         <label for="todo-{{todo.id}}">
-          <input type="checkbox" id="todo-{{todo.id}}" name="todo-{{todo.id}}" [(ngModel)]="checkboxValue">
+          <input type="checkbox" id="todo-{{todo.id}}" name="todo-{{todo.id}}" [(ngModel)]="todo.isCompleted">
           {{todo.title}}
         </label>
         <div class="action">
-          <a href="#" (click)="editTodo()">Edit</a>
+          <a href="#">Edit</a>
           <a href="#" (click)="deleteTodo()">Delete</a>
         </div>
       </div>
@@ -46,16 +46,6 @@ export class TodoComponent {
 
   @Input("listTodo")
   todoList!: Todo[]
-
-  ngAfterViewInit() {
-    setTimeout(() => {
-      this.checkboxValue = this.todo.isCompleted;
-    });
-  }
-
-  editTodo() {
-    this.todo.isCompleted = this.checkboxValue;
-  }
 
   deleteTodo() {
     TODOS.splice(this.todoList.indexOf(this.todo),1)
