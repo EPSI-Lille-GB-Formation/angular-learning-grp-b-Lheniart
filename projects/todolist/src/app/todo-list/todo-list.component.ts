@@ -25,7 +25,7 @@ import {RetourDirective} from "../retour.directive";
       <a href="#" role="button" (click)="createTodo($event)" >Créer</a>
 
       <ng-container *ngFor="let todo of todoList">
-          <app-todo [value]="todo" [listTodo]="todoList" *ngIf="(todo.isCompleted === completedFiler) || (showAll)"></app-todo>
+          <app-todo [value]="todo" [listTodo]="todoList" *ngIf="(todo.isCompleted === completedFiler) || (showAll)" (deleteTodoEvent)="onDelete()"></app-todo>
       </ng-container>
   `,
   styles: [
@@ -58,5 +58,8 @@ export class TodoListComponent {
   }
   onClickTodoShowAll(): void{
     this.showAll = !this.showAll;
+  }
+  onDelete(){
+    this.todoService.getTodoList().subscribe(todos => this.todoList = todos)
   }
 }

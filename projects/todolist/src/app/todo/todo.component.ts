@@ -1,10 +1,8 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {BorderHighlightDirective} from "../border-highlight.directive";
 import {CommonModule} from "@angular/common";
 import {Todo} from "../todo";
 import {FormsModule} from "@angular/forms";
-import {TODOS} from "../mock-todo";
-import {routes} from "../app.routes";
 import {Router} from "@angular/router";
 import {TodoService} from "../todo.service";
 import {RetourDirective} from "../retour.directive";
@@ -47,6 +45,8 @@ export class TodoComponent {
 
   constructor(private router: Router, private todoService: TodoService) {
   }
+  @Output()
+  deleteTodoEvent = new EventEmitter<string>();
 
   @Input("value")
   todo!: Todo
@@ -64,5 +64,6 @@ export class TodoComponent {
   deleteTodo(event: Event) {
     event.preventDefault()
     this.todoService.deleteTodo(this.todo.id).subscribe(todo =>console.log(todo))
+    this.deleteTodoEvent.emit()
   }
 }
