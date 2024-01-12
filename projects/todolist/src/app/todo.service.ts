@@ -26,8 +26,8 @@ export class TodoService {
   }
 
   getTodoById(id : number): Observable<Todo>{
-    return this.http.get<Todo>(this.todosUrl).pipe(
-      tap(),
+    return this.http.get<Todo>(this.todosUrl + `/${id}`).pipe(
+      tap(todo => console.log(todo)),
       catchError(error => {
         console.log(error)
         return of()

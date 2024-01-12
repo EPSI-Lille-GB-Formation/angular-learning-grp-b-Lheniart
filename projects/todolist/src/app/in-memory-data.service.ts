@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {InMemoryDbService} from "angular-in-memory-web-api";
-import {Observable} from "rxjs";
 import {TODOS} from "./mock-todo";
-
+import {Todo} from "./todo";
 
 
 @Injectable({
@@ -16,4 +15,9 @@ export class InMemoryDataService implements InMemoryDbService{
     const todos = TODOS
     return {todos}
   }
+
+  getById(id: number): Todo {
+    return TODOS.find(todo => todo.id === id)!
+  }
+
 }
